@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "petct-bodycomp-extractor"
+version = "0.1.0"
+description = "Windows-ready PET/CT body-composition extraction and research risk-score prototype."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "PET/CT Body Composition Study Team" }
+]
+dependencies = [
+  "nibabel>=5.1",
+  "numpy>=1.23,<2.3",
+  "pandas>=1.5",
+  "scipy>=1.10",
+  "TotalSegmentator>=2.5,<3"
+]
+
+[project.scripts]
+petct-bodycomp = "petct_bodycomp.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["petct_bodycomp*"]
+
+[tool.setuptools.package-data]
+petct_bodycomp = ["risk_model_spec.json"]

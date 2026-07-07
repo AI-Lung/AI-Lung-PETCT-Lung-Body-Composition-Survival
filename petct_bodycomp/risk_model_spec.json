@@ -1,0 +1,550 @@
+{
+  "schema_version": "1.0.0",
+  "source": "EJNMMI revision Figure 6 final reduced ridge-penalized Cox Clinical+CT+PET model",
+  "analysis_date": "2026-07-06",
+  "model_name": "Clinical+CT+PET reduced ridge-Cox",
+  "intended_use": "Research-only risk score and risk stratification; not for clinical treatment decisions.",
+  "training_cohort": {
+    "name": "Center 1 development cohort",
+    "n": 555
+  },
+  "external_cohort": {
+    "name": "Center 2 external validation cohort",
+    "n": 214
+  },
+  "clinical_input_mapping": {
+    "Gender": {
+      "Female": "0",
+      "Male": "1"
+    },
+    "Cli": {
+      "Stage I": "1",
+      "Stage II": "2",
+      "Stage IIIA": "3"
+    },
+    "Path": {
+      "Adenocarcinoma": "1",
+      "Squamous cell carcinoma": "2",
+      "Other/unspecified NSCLC": "3"
+    }
+  },
+  "feature_notes": {
+    "Tumor_SUVmax_missing": "Set to 1 when tumor SUVmax is unavailable; Tumor_SUVmax is then median-imputed from the development cohort.",
+    "SM_volume": "Raw skeletal muscle volume in cm3 extracted from the CT tissue mask. It is used internally by the Figure 6 risk model.",
+    "risk_group": "For a new single patient, the development-cohort median is the default locked reference cutoff. Figure 6 also used cohort-specific median cutoffs for visualization."
+  },
+  "endpoints": {
+    "OS": {
+      "primary_horizon_months": 60.0,
+      "time_grid_months": [
+        12.0,
+        36.0,
+        60.0
+      ],
+      "features_raw": [
+        "Age",
+        "Tumor_SUVmax",
+        "Tumor_SUVmax_missing",
+        "Gender",
+        "Cli",
+        "Path",
+        "SAT_volume_index",
+        "IMAT_volume_index",
+        "SM_density_mean",
+        "TAT_volume_index",
+        "IMAT_density_mean",
+        "SM_volume",
+        "TF_SAT_ratio",
+        "SM_volume_index",
+        "Bone_density_mean",
+        "IMAT_density_sd",
+        "TAT_SURmean",
+        "SAT_SURmean",
+        "IMAT_SURsd",
+        "SM_SURmean"
+      ],
+      "encoded_columns": [
+        "Age",
+        "Tumor_SUVmax",
+        "Tumor_SUVmax_missing",
+        "SAT_volume_index",
+        "IMAT_volume_index",
+        "SM_density_mean",
+        "TAT_volume_index",
+        "IMAT_density_mean",
+        "SM_volume",
+        "TF_SAT_ratio",
+        "SM_volume_index",
+        "Bone_density_mean",
+        "IMAT_density_sd",
+        "TAT_SURmean",
+        "SAT_SURmean",
+        "IMAT_SURsd",
+        "SM_SURmean",
+        "Gender_1",
+        "Cli_2",
+        "Cli_3",
+        "Path_2",
+        "Path_3"
+      ],
+      "continuous_cols": [
+        "Age",
+        "Tumor_SUVmax",
+        "Tumor_SUVmax_missing",
+        "SAT_volume_index",
+        "IMAT_volume_index",
+        "SM_density_mean",
+        "TAT_volume_index",
+        "IMAT_density_mean",
+        "SM_volume",
+        "TF_SAT_ratio",
+        "SM_volume_index",
+        "Bone_density_mean",
+        "IMAT_density_sd",
+        "TAT_SURmean",
+        "SAT_SURmean",
+        "IMAT_SURsd",
+        "SM_SURmean"
+      ],
+      "categorical_cols": [
+        "Gender",
+        "Cli",
+        "Path"
+      ],
+      "medians": {
+        "Age": 62.0,
+        "Tumor_SUVmax": 3.9050000000000002,
+        "Tumor_SUVmax_missing": 0.0,
+        "SAT_volume_index": 2.98281285639448,
+        "IMAT_volume_index": 0.347676686127194,
+        "SM_density_mean": 38.28,
+        "TAT_volume_index": 1199.17169614984,
+        "IMAT_density_mean": -62.44,
+        "SM_volume": 12083.35,
+        "TF_SAT_ratio": 424.752193583284,
+        "SM_volume_index": 3.68956483984778,
+        "Bone_density_mean": 341.67,
+        "IMAT_density_sd": 36.44,
+        "TAT_SURmean": 0.590513267083291,
+        "SAT_SURmean": 0.0656054471843946,
+        "IMAT_SURsd": 0.346404079479515,
+        "SM_SURmean": 0.299179111858372
+      },
+      "modes": {
+        "Gender": "0",
+        "Cli": "1",
+        "Path": "1"
+      },
+      "prestandardization_means": {
+        "Age": 61.21981981981982,
+        "Tumor_SUVmax": 5.4804144144144145,
+        "Tumor_SUVmax_missing": 0.1891891891891892,
+        "SAT_volume_index": 3.086381887744714,
+        "IMAT_volume_index": 0.36544377855028465,
+        "SM_density_mean": 36.93562162162162,
+        "TAT_volume_index": 1249.302219051569,
+        "IMAT_density_mean": -62.1035855855856,
+        "SM_volume": 13137.622918918916,
+        "TF_SAT_ratio": 470.5894373698907,
+        "SM_volume_index": 3.7531922640365067,
+        "Bone_density_mean": 341.80097297297294,
+        "IMAT_density_sd": 37.22821621621622,
+        "TAT_SURmean": 0.6098713748402319,
+        "SAT_SURmean": 0.06927263722022445,
+        "IMAT_SURsd": 0.36131049372196006,
+        "SM_SURmean": 0.30699926525133964,
+        "Gender_1": 0.4954954954954955,
+        "Cli_2": 0.15495495495495495,
+        "Cli_3": 0.10810810810810811,
+        "Path_2": 0.13513513513513514,
+        "Path_3": 0.04864864864864865
+      },
+      "prestandardization_stds": {
+        "Age": 9.95767457042145,
+        "Tumor_SUVmax": 5.3087804579567255,
+        "Tumor_SUVmax_missing": 0.3916588309780929,
+        "SAT_volume_index": 1.4382374555512651,
+        "IMAT_volume_index": 0.12491349765424871,
+        "SM_density_mean": 21.792483779924474,
+        "TAT_volume_index": 565.2124135562261,
+        "IMAT_density_mean": 14.852824802745552,
+        "SM_volume": 3594.7837869676578,
+        "TF_SAT_ratio": 243.97859800529793,
+        "SM_volume_index": 0.5378888677910196,
+        "Bone_density_mean": 51.24429597217581,
+        "IMAT_density_sd": 18.71366387795384,
+        "TAT_SURmean": 0.11993508044356954,
+        "SAT_SURmean": 0.021403626905988272,
+        "IMAT_SURsd": 0.07955553631738581,
+        "SM_SURmean": 0.054158627223558894,
+        "Gender_1": 0.4999797090274453,
+        "Cli_2": 0.3618617372559067,
+        "Cli_3": 0.31051689981286645,
+        "Path_2": 0.34186785515333834,
+        "Path_3": 0.2151324188338638
+      },
+      "lifelines_norm_mean": {
+        "Age": 1.3122636110884732e-16,
+        "Tumor_SUVmax": -2.5605143630994602e-17,
+        "Tumor_SUVmax_missing": -4.480900135424055e-17,
+        "SAT_volume_index": 8.641735975460678e-17,
+        "IMAT_volume_index": -2.6405304369463184e-16,
+        "SM_density_mean": 3.200642953874325e-17,
+        "TAT_volume_index": 1.0242057452397841e-16,
+        "IMAT_density_mean": 8.833774552693138e-16,
+        "SM_volume": 7.8095688074533535e-16,
+        "TF_SAT_ratio": -1.1202250338560137e-16,
+        "SM_volume_index": 6.913388780368543e-16,
+        "Bone_density_mean": 5.761157316973786e-16,
+        "IMAT_density_sd": -9.921993157010408e-17,
+        "TAT_SURmean": 9.089825989003083e-16,
+        "SAT_SURmean": -1.664334336014649e-16,
+        "IMAT_SURsd": 4.544912994501542e-16,
+        "SM_SURmean": 3.5207072492617577e-16,
+        "Gender_1": -4.160835840036623e-17,
+        "Cli_2": 1.6003214769371626e-17,
+        "Cli_3": -6.4012859077486504e-18,
+        "Path_2": 7.041414498523515e-17,
+        "Path_3": -3.8407715446491904e-17
+      },
+      "cox_coefficients": {
+        "Age": 0.1115165610053888,
+        "Tumor_SUVmax": 0.14901567120187617,
+        "Tumor_SUVmax_missing": -0.011019433186295946,
+        "SAT_volume_index": 0.018122274814363015,
+        "IMAT_volume_index": 0.07647048850680137,
+        "SM_density_mean": 0.006708574121656481,
+        "TAT_volume_index": -0.025277737920149215,
+        "IMAT_density_mean": 0.006128665491993163,
+        "SM_volume": -0.07891518000155082,
+        "TF_SAT_ratio": -0.03258079505439835,
+        "SM_volume_index": -0.06340651517350088,
+        "Bone_density_mean": 0.02878277911105263,
+        "IMAT_density_sd": -0.01305087114613898,
+        "TAT_SURmean": -0.012685159230021132,
+        "SAT_SURmean": 0.05340402631172244,
+        "IMAT_SURsd": -0.018611719784216284,
+        "SM_SURmean": 0.007147798315704245,
+        "Gender_1": 0.04054394932972307,
+        "Cli_2": 0.05316833312602628,
+        "Cli_3": 0.21504020297287302,
+        "Path_2": 0.08771951234484844,
+        "Path_3": 0.12186461722972565
+      },
+      "penalizer": 0.1,
+      "l1_ratio": 0.0,
+      "cutoffs": {
+        "development_median": {
+          "cutoff": 0.909169270609561,
+          "low_n": 277,
+          "high_n": 278,
+          "logrank_p": 0.004634468467867,
+          "source": "cohort-specific median risk score"
+        },
+        "external_validation_median": {
+          "cutoff": 1.3672903793403854,
+          "low_n": 107,
+          "high_n": 107,
+          "logrank_p": 0.0456671840670264,
+          "source": "cohort-specific median risk score"
+        }
+      },
+      "baseline_survival": {
+        "12": {
+          "horizon_months": 12.0,
+          "baseline_survival": 0.9761562068037043
+        },
+        "36": {
+          "horizon_months": 36.0,
+          "baseline_survival": 0.9059017541332562
+        },
+        "60": {
+          "horizon_months": 60.0,
+          "baseline_survival": 0.8856524228963648
+        }
+      },
+      "performance": {
+        "external_c_index": 0.6525009402030839,
+        "external_c_index_ci": [
+          0.5561357401566297,
+          0.7465373340625931
+        ],
+        "external_auc": {
+          "12": 0.7640469114737828,
+          "36": 0.622257293953094,
+          "60": 0.5859295276937965
+        }
+      },
+      "risk_score_quantiles_development": {
+        "5": 0.5814292207461205,
+        "25": 0.7631076738673506,
+        "50": 0.909169270609561,
+        "75": 1.2482020371088995,
+        "95": 2.2151763900348027
+      },
+      "risk_score_quantiles_external": {
+        "5": 0.9640875181561182,
+        "25": 1.1715952134398622,
+        "50": 1.3672903793403854,
+        "75": 1.687918286403101,
+        "95": 18.931203421489936
+      }
+    },
+    "PFS": {
+      "primary_horizon_months": 36.0,
+      "time_grid_months": [
+        12.0,
+        24.0,
+        36.0
+      ],
+      "features_raw": [
+        "Age",
+        "Tumor_SUVmax",
+        "Tumor_SUVmax_missing",
+        "Gender",
+        "Cli",
+        "Path",
+        "SAT_volume_index",
+        "IMAT_volume_index",
+        "SM_density_mean",
+        "TAT_volume_index",
+        "IMAT_density_mean",
+        "SM_volume",
+        "TF_SAT_ratio",
+        "SM_volume_index",
+        "Bone_density_mean",
+        "IMAT_density_sd",
+        "TAT_SURmean",
+        "SAT_SURmean",
+        "IMAT_SURsd",
+        "SM_SURmean"
+      ],
+      "encoded_columns": [
+        "Age",
+        "Tumor_SUVmax",
+        "Tumor_SUVmax_missing",
+        "SAT_volume_index",
+        "IMAT_volume_index",
+        "SM_density_mean",
+        "TAT_volume_index",
+        "IMAT_density_mean",
+        "SM_volume",
+        "TF_SAT_ratio",
+        "SM_volume_index",
+        "Bone_density_mean",
+        "IMAT_density_sd",
+        "TAT_SURmean",
+        "SAT_SURmean",
+        "IMAT_SURsd",
+        "SM_SURmean",
+        "Gender_1",
+        "Cli_2",
+        "Cli_3",
+        "Path_2",
+        "Path_3"
+      ],
+      "continuous_cols": [
+        "Age",
+        "Tumor_SUVmax",
+        "Tumor_SUVmax_missing",
+        "SAT_volume_index",
+        "IMAT_volume_index",
+        "SM_density_mean",
+        "TAT_volume_index",
+        "IMAT_density_mean",
+        "SM_volume",
+        "TF_SAT_ratio",
+        "SM_volume_index",
+        "Bone_density_mean",
+        "IMAT_density_sd",
+        "TAT_SURmean",
+        "SAT_SURmean",
+        "IMAT_SURsd",
+        "SM_SURmean"
+      ],
+      "categorical_cols": [
+        "Gender",
+        "Cli",
+        "Path"
+      ],
+      "medians": {
+        "Age": 62.0,
+        "Tumor_SUVmax": 3.9050000000000002,
+        "Tumor_SUVmax_missing": 0.0,
+        "SAT_volume_index": 2.98281285639448,
+        "IMAT_volume_index": 0.347676686127194,
+        "SM_density_mean": 38.28,
+        "TAT_volume_index": 1199.17169614984,
+        "IMAT_density_mean": -62.44,
+        "SM_volume": 12083.35,
+        "TF_SAT_ratio": 424.752193583284,
+        "SM_volume_index": 3.68956483984778,
+        "Bone_density_mean": 341.67,
+        "IMAT_density_sd": 36.44,
+        "TAT_SURmean": 0.590513267083291,
+        "SAT_SURmean": 0.0656054471843946,
+        "IMAT_SURsd": 0.346404079479515,
+        "SM_SURmean": 0.299179111858372
+      },
+      "modes": {
+        "Gender": "0",
+        "Cli": "1",
+        "Path": "1"
+      },
+      "prestandardization_means": {
+        "Age": 61.21981981981982,
+        "Tumor_SUVmax": 5.4804144144144145,
+        "Tumor_SUVmax_missing": 0.1891891891891892,
+        "SAT_volume_index": 3.086381887744714,
+        "IMAT_volume_index": 0.36544377855028465,
+        "SM_density_mean": 36.93562162162162,
+        "TAT_volume_index": 1249.302219051569,
+        "IMAT_density_mean": -62.1035855855856,
+        "SM_volume": 13137.622918918916,
+        "TF_SAT_ratio": 470.5894373698907,
+        "SM_volume_index": 3.7531922640365067,
+        "Bone_density_mean": 341.80097297297294,
+        "IMAT_density_sd": 37.22821621621622,
+        "TAT_SURmean": 0.6098713748402319,
+        "SAT_SURmean": 0.06927263722022445,
+        "IMAT_SURsd": 0.36131049372196006,
+        "SM_SURmean": 0.30699926525133964,
+        "Gender_1": 0.4954954954954955,
+        "Cli_2": 0.15495495495495495,
+        "Cli_3": 0.10810810810810811,
+        "Path_2": 0.13513513513513514,
+        "Path_3": 0.04864864864864865
+      },
+      "prestandardization_stds": {
+        "Age": 9.95767457042145,
+        "Tumor_SUVmax": 5.3087804579567255,
+        "Tumor_SUVmax_missing": 0.3916588309780929,
+        "SAT_volume_index": 1.4382374555512651,
+        "IMAT_volume_index": 0.12491349765424871,
+        "SM_density_mean": 21.792483779924474,
+        "TAT_volume_index": 565.2124135562261,
+        "IMAT_density_mean": 14.852824802745552,
+        "SM_volume": 3594.7837869676578,
+        "TF_SAT_ratio": 243.97859800529793,
+        "SM_volume_index": 0.5378888677910196,
+        "Bone_density_mean": 51.24429597217581,
+        "IMAT_density_sd": 18.71366387795384,
+        "TAT_SURmean": 0.11993508044356954,
+        "SAT_SURmean": 0.021403626905988272,
+        "IMAT_SURsd": 0.07955553631738581,
+        "SM_SURmean": 0.054158627223558894,
+        "Gender_1": 0.4999797090274453,
+        "Cli_2": 0.3618617372559067,
+        "Cli_3": 0.31051689981286645,
+        "Path_2": 0.34186785515333834,
+        "Path_3": 0.2151324188338638
+      },
+      "lifelines_norm_mean": {
+        "Age": 1.2162443224722435e-16,
+        "Tumor_SUVmax": -6.4012859077486504e-18,
+        "Tumor_SUVmax_missing": -5.1210287261989203e-17,
+        "SAT_volume_index": 6.561318055442366e-17,
+        "IMAT_volume_index": -2.7765577624859773e-16,
+        "SM_density_mean": 2.880578658486893e-17,
+        "TAT_volume_index": 1.0402089600091557e-16,
+        "IMAT_density_mean": 8.769761693615651e-16,
+        "SM_volume": 7.87358166653084e-16,
+        "TF_SAT_ratio": -1.1682346781641286e-16,
+        "SM_volume_index": 6.721350203136083e-16,
+        "Bone_density_mean": 5.697144457896299e-16,
+        "IMAT_density_sd": -1.0242057452397841e-16,
+        "TAT_SURmean": 9.025813129925597e-16,
+        "SAT_SURmean": -1.6003214769371625e-16,
+        "IMAT_SURsd": 4.608925853579028e-16,
+        "SM_SURmean": 3.6167265378779875e-16,
+        "Gender_1": -5.4410930215863527e-17,
+        "Cli_2": 1.9203857723245952e-17,
+        "Cli_3": 0.0,
+        "Path_2": 7.041414498523515e-17,
+        "Path_3": -5.761157316973786e-17
+      },
+      "cox_coefficients": {
+        "Age": 0.11060576445152101,
+        "Tumor_SUVmax": 0.18499599319300747,
+        "Tumor_SUVmax_missing": 0.11326872775885866,
+        "SAT_volume_index": 0.029884056479982147,
+        "IMAT_volume_index": 0.08408352241646158,
+        "SM_density_mean": 0.016190662254793407,
+        "TAT_volume_index": -0.019368992065749623,
+        "IMAT_density_mean": 0.0015941826960543099,
+        "SM_volume": -0.076036537187774,
+        "TF_SAT_ratio": -0.011521230190712354,
+        "SM_volume_index": -0.02649827022626037,
+        "Bone_density_mean": 0.10379107384339589,
+        "IMAT_density_sd": -0.019237970383338934,
+        "TAT_SURmean": -0.031214446533905378,
+        "SAT_SURmean": 0.028953958910390758,
+        "IMAT_SURsd": -0.014264648884979308,
+        "SM_SURmean": 0.010428048751177846,
+        "Gender_1": 0.1128207937712319,
+        "Cli_2": 0.010800527736773464,
+        "Cli_3": 0.19696318050271097,
+        "Path_2": 0.1359045681913373,
+        "Path_3": 0.12947552377239768
+      },
+      "penalizer": 0.1,
+      "l1_ratio": 0.0,
+      "cutoffs": {
+        "development_median": {
+          "cutoff": 0.9009174006191196,
+          "low_n": 277,
+          "high_n": 278,
+          "logrank_p": 7.151034949446877e-06,
+          "source": "cohort-specific median risk score"
+        },
+        "external_validation_median": {
+          "cutoff": 1.3075139444190351,
+          "low_n": 107,
+          "high_n": 107,
+          "logrank_p": 0.0097471571034078,
+          "source": "cohort-specific median risk score"
+        }
+      },
+      "baseline_survival": {
+        "12": {
+          "horizon_months": 12.0,
+          "baseline_survival": 0.9392298470215946
+        },
+        "24": {
+          "horizon_months": 24.0,
+          "baseline_survival": 0.8784463737802589
+        },
+        "36": {
+          "horizon_months": 36.0,
+          "baseline_survival": 0.8209538341883789
+        }
+      },
+      "performance": {
+        "external_c_index": 0.6556507547939616,
+        "external_c_index_ci": [
+          0.5605076799799158,
+          0.7333358960022365
+        ],
+        "external_auc": {
+          "12": 0.7229175599084784,
+          "24": 0.6416073092756523,
+          "36": 0.6584885925771159
+        }
+      },
+      "risk_score_quantiles_development": {
+        "5": 0.5815196546526787,
+        "25": 0.7121259874643688,
+        "50": 0.9009174006191196,
+        "75": 1.327360166746483,
+        "95": 2.241112713358075
+      },
+      "risk_score_quantiles_external": {
+        "5": 0.8697899436584207,
+        "25": 1.093832718565786,
+        "50": 1.3075139444190351,
+        "75": 1.5776277070815976,
+        "95": 3.3732611665446717
+      }
+    }
+  }
+}
